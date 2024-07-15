@@ -6,15 +6,20 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from .models import OTP
 import random
+from rest_framework.permissions import AllowAny
+
 
 def send_otp_email(email, otp_code):
-    subject = 'Your OTP Code'
-    message = f'Your OTP code is {otp_code}.'
+    subject = 'Votre code OTP'
+    message = f'Votre code OTP est : {otp_code}'
     email_from = settings.DEFAULT_FROM_EMAIL
     recipient_list = [email]
     send_mail(subject, message, email_from, recipient_list)
 
+
 class GenerateOTPView(APIView):
+    permission_classes = [AllowAny]
+
     def post(self, request):
         email = request.data.get('email')
         if not email:
@@ -34,6 +39,8 @@ class GenerateOTPView(APIView):
         return Response({"message": "OTP generated and sent to email"}, status=status.HTTP_201_CREATED)
 
 class VerifyOTPView(APIView):
+    permission_classes = [AllowAny]
+
     def post(self, request):
         email = request.data.get('email')
         code = request.data.get('code')
