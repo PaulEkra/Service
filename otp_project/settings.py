@@ -82,9 +82,12 @@ TEMPLATES = [
         },
     },
 ]
+CORS_ALLOW_CREDENTIALS = True
 
 WSGI_APPLICATION = 'otp_project.wsgi.application'
-
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:3000',
+]
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
@@ -94,7 +97,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'micro_django_paul',
         'USER': 'postgres',
-        'PASSWORD': 'delmas',
+        'PASSWORD': 'Pipi1306',
         'HOST': 'localhost',
         'PORT': '5432',
     }
